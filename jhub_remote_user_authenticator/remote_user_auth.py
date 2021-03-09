@@ -27,7 +27,7 @@ class RemoteUserAuthenticator(Authenticator):
     Accept the authenticated user name from the REMOTE_USER HTTP header.
     """
     header_name = Unicode(
-        default_value='REMOTE_USER',
+        default_value='igx-user-id',
         config=True,
         help="""HTTP header to inspect for the authenticated username.""")
 
@@ -48,7 +48,7 @@ class RemoteUserLocalAuthenticator(LocalAuthenticator):
     local accounts through the admin interface.
     """
     header_name = Unicode(
-        default_value='REMOTE_USER',
+        default_value='igx-user-id',
         config=True,
         help="""HTTP header to inspect for the authenticated username.""")
 
