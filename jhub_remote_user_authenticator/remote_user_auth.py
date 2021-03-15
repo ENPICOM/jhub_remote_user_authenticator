@@ -12,10 +12,10 @@ class RemoteUserLoginHandler(BaseHandler):
     def get(self):
         header_name = self.authenticator.header_name
         remote_user = self.request.headers.get(header_name, "")
+        raise RuntimeError("header_name: " + header_name + ", request headers: " + self.request.headers + ", remote_user: " + remote_user)
         if remote_user == "":
             raise web.HTTPError(401)
-            raise RuntimeError("header_name: " + header_name + ", request headers: " + self.request.headers + ", remote_user: " + remote_user)
-
+            
         user = self.user_from_username(remote_user)
         self.set_login_cookie(user)
         next_url = self.get_next_url(user)
