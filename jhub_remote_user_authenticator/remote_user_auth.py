@@ -6,16 +6,17 @@ from jupyterhub.auth import LocalAuthenticator
 from jupyterhub.utils import url_path_join
 from tornado import gen, web
 from traitlets import Unicode
+import logging
 
 
 class RemoteUserLoginHandler(BaseHandler):
 
     def get(self):
         header_name = self.authenticator.header_name
-        print(header_name)
+        logging.warning(header_name)
         remote_user = self.request.headers.get(header_name, "")
-        print(self.request.headers)
-        print(remote_user)
+        logging.warning(self.request.headers)
+        logging.warning(remote_user)
         if remote_user == "":
             raise web.HTTPError(401)
 
