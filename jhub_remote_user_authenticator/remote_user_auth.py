@@ -15,10 +15,10 @@ class RemoteUserLoginHandler(BaseHandler):
 
     def get(self):
         header_name = self.authenticator.header_name
-        logging.info(header_name)
+        logging.debug(header_name)
         remote_user = self.request.headers.get(header_name, "")
-        logging.info(self.request.headers)
-        logging.info(remote_user)
+        logging.debug(self.request.headers)
+        logging.debug(remote_user)
         if remote_user == "":
             raise web.HTTPError(401)
 
