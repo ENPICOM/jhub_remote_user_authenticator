@@ -11,9 +11,9 @@ import sys
 
 
 class RemoteUserLoginHandler(BaseHandler):
-    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
     def get(self):
+        logging.basicConfig(stream=sys.stdout, level=logging.DEBUG, disable_existing_loggers=True)
         header_name = self.authenticator.header_name
         logging.debug(header_name)
         remote_user = self.request.headers.get(header_name, "")
