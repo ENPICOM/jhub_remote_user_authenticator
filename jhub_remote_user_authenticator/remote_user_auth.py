@@ -6,21 +6,15 @@ from jupyterhub.auth import LocalAuthenticator
 from jupyterhub.utils import url_path_join
 from tornado import gen, web
 from traitlets import Unicode
-import logging
-import sys
-
 
 class RemoteUserLoginHandler(BaseHandler):
 
     def get(self):
-        logging.basicConfig(stream=sys.stdout, level=logging.DEBUG, disable_existing_loggers=True)
         header_name = self.authenticator.header_name
-        logging.debug(header_name)
         remote_user = self.request.headers.get(header_name, "")
-        logging.debug(self.request.headers)
-        logging.debug(remote_user)
         if remote_user == "":
             raise web.HTTPError(401)
+            raise RuntimeError("header_name: " + header_name + ", request headers: " + self.request.headers + ", remote_user: " + remote_user)
 
         user = self.user_from_username(remote_user)
         self.set_login_cookie(user)
